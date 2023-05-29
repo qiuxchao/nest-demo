@@ -1,13 +1,26 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
-import { UsersService } from './users/users.service';
+import { MongoConnectionOptions } from 'typeorm/driver/mongodb/MongoConnectionOptions';
 
 @Module({
-  imports: [UsersModule],
-  controllers: [AppController, UsersController],
-  providers: [AppService, UsersService],
+  imports: [
+    UsersModule,
+    TypeOrmModule.forRootAsync({
+      useFactory: () =>
+        ({
+          type: 'mongodb',
+          host: 'localhost',
+          port: 27017,
+          database: 'nest-demo',
+          entities: [__dirname + '/**/*.entity{.ts,.js}'],
+          synchronize: true,
+        } as MongoConnectionOptions),
+    }),
+  ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
