@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Req } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './users.entity';
 import { ObjectId } from 'typeorm';
@@ -28,8 +28,9 @@ export class UsersController {
     return this.usersService.deleteUser(body.id);
   }
 
-  @Get('info')
-  getUserById(@Req() req): Promise<User> {
-    return this.usersService.getUserById(req.query.id);
+  @Post('info')
+  getUserById(@Body('id') id): Promise<User> {
+    console.log('333', id);
+    return this.usersService.getUserById(id);
   }
 }

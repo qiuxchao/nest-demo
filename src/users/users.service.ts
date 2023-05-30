@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './users.entity';
-import { ObjectId, Repository } from 'typeorm';
-
+import { MongoRepository } from 'typeorm';
+import { ObjectId } from 'mongodb';
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>,
+    private readonly userRepository: MongoRepository<User>,
   ) {}
 
   /** 获取用户列表 */
-  getUserList(): Promise<User[]> {
+  async getUserList(): Promise<User[]> {
     return this.userRepository.find();
   }
 
@@ -22,17 +22,20 @@ export class UsersService {
   }
 
   /** 更新用户 */
-  updateUser(user: User): Promise<User> {
-    return this.userRepository.save(user);
+  async updateUser(user: User): Promise<User> {
+    await this.userRepository.update(user.id, user);
+    return this.userRepository.findOne(new ObjectId(user.id));
   }
 
   /** 删除用户 */
-  deleteUser(id: ObjectId): Promise<any> {
+  async deleteUser(id: ObjectId): Promise<any> {
     return this.userRepository.delete(id);
   }
 
   /** 根据id获取用户 */
-  getUserById(id: ObjectId): Promise<User> {
-    return this.userRepository.findOne({ where: { id } });
+  async getUserById(id: ObjectId): Promise<User> {
+    const result = await this.userRepository.findOneBy(new ObjectId(id));
+    console.log('444', result);
+    return result;
   }
 }
