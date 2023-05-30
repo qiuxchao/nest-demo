@@ -71,3 +71,13 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## API
+
+HOST: `http://localhost:3000`
+
+- `GET:/user/list` get user list
+- `POST:/user/create` create user
+- `POST:/user/delete` delete user
+- `POST:/user/update` update user
+- `POST:/user/info` get single user's info

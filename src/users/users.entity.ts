@@ -6,10 +6,13 @@ export class User {
   id: ObjectId;
 
   @Column()
-  firstName: string;
+  name: string;
 
   @Column()
-  lastName: string;
+  age: number;
+
+  @Column()
+  city: string;
 
   @Column({ default: true })
   isActive: boolean;
