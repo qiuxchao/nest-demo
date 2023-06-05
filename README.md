@@ -1,30 +1,7 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Nest Demo 1
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- 基本 CRUD
+- jwt 用户鉴权
 
 ## Installation
 
@@ -57,20 +34,6 @@ $ pnpm run test:e2e
 # test coverage
 $ pnpm run test:cov
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
 
 ## API
 
@@ -191,17 +154,17 @@ if (error) {
 
 `joi` 还提供了许多其他方法，例如 `array()`、`boolean()`、`date()`、`alternatives()` 等等，用于定义和验证其他类型的对象。
 
-### bcrypt 这个包的作用
+### bcryptjs 这个包的作用
 
-`bcrypt` 是一个 Node.js 模块，用于将密码哈希化。它提供了一种简单的方式来保护用户密码，使得即使数据库被盗也不会泄露用户的密码。
+`bcryptjs` 是一个 Node.js 模块，用于将密码哈希化。它提供了一种简单的方式来保护用户密码，使得即使数据库被盗也不会泄露用户的密码。
 
-使用 `bcrypt`，您可以将用户密码哈希化，并将其存储在数据库中。当用户登录时，您可以将其输入的密码与存储在数据库中的哈希值进行比较，以验证用户的身份。这样，即使数据库被盗，黑客也无法轻易地获取用户的密码。
+使用 `bcryptjs`，您可以将用户密码哈希化，并将其存储在数据库中。当用户登录时，您可以将其输入的密码与存储在数据库中的哈希值进行比较，以验证用户的身份。这样，即使数据库被盗，黑客也无法轻易地获取用户的密码。
 
-在 TypeScript 和 JavaScript 中，您可以使用 `bcrypt` 来哈希化密码。例如，您可以在 `hashing.service.ts` 中使用 `bcrypt` 来哈希化密码，如下所示：
+在 TypeScript 和 JavaScript 中，您可以使用 `bcryptjs` 来哈希化密码。例如，您可以在 `hashing.service.ts` 中使用 `bcryptjs` 来哈希化密码，如下所示：
 
 ```ts
 import { Injectable } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class HashingService {
@@ -223,7 +186,7 @@ export class HashingService {
 
 ```ts
 import { Injectable } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class HashingService {

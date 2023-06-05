@@ -54,7 +54,7 @@ export class AuthService {
   private async signToken<T>(userId: ObjectId, payload?: T) {
     return await this.jwtService.signAsync(
       {
-        sub: userId,
+        typeid: userId,
         ...payload,
       },
       {

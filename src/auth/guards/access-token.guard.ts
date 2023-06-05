@@ -31,10 +31,10 @@ export class AccessTokenGuard implements CanActivate {
     if (!token) throw new UnauthorizedException();
 
     try {
-      const payload = this.jwtService.verifyAsync(token, this.jwtConfiguration);
+      const payload = this.jwtService.verify(token, this.jwtConfiguration);
       request[REQUEST_USER_KEY] = payload;
     } catch (error) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Invalid token');
     }
     return true;
   }

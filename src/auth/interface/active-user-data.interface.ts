@@ -1,6 +1,6 @@
 import { ObjectId } from 'typeorm';
 
 export interface ActiveUserData {
-  sub: ObjectId;
+  typeid: ObjectId;
   username: string;
 }

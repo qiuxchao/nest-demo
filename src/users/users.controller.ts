@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './users.entity';
 import { ObjectId } from 'typeorm';
@@ -8,7 +8,8 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get('list')
-  getUserList(): Promise<User[]> {
+  getUserList(@Req() req): Promise<User[]> {
+    console.log('req: ', req.user);
     return this.usersService.getUserList();
   }
 
