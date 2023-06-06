@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { MongoConnectionOptions } from 'typeorm/driver/mongodb/MongoConnectionOptions';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { AuthPassportModule } from './auth-passport/auth-passport.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -36,6 +37,7 @@ import * as Joi from 'joi';
         } as unknown as MongoConnectionOptions),
     }),
     AuthModule,
+    AuthPassportModule,
   ],
   controllers: [AppController],
   providers: [AppService],
