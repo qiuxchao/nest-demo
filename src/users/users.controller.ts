@@ -9,7 +9,7 @@ export class UsersController {
 
   @Get('list')
   getUserList(@Req() req): Promise<User[]> {
-    console.log('req: ', req.user);
+    console.log('user: ', req.user);
     return this.usersService.getUserList();
   }
 

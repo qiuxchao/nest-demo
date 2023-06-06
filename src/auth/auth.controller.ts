@@ -3,6 +3,7 @@ import { SignInDto } from './dto/sign-in.dto';
 import { AuthService } from './auth.service';
 import { SignUpDto } from './dto/sign-up.dto';
 import { Public } from '../common/decorators/public.decorator';
+import { AuthPipe } from './auth.pipe';
 
 @Controller('auth')
 export class AuthController {
@@ -11,14 +12,14 @@ export class AuthController {
   @Public()
   @Post('sign-in')
   @HttpCode(HttpStatus.OK)
-  async signIn(@Body() signInDto: SignInDto) {
+  async signIn(@Body(AuthPipe) signInDto: SignInDto) {
     return this.authService.signIn(signInDto);
   }
 
   @Public()
   @Post('sign-up')
   @HttpCode(HttpStatus.CREATED)
-  async signUp(@Body() signUpDto: SignUpDto) {
+  async signUp(@Body(AuthPipe) signUpDto: SignUpDto) {
     return this.authService.signUp(signUpDto);
   }
 }
