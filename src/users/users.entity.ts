@@ -23,5 +23,6 @@ export class User {
   city: string;
 
   @Column({ default: true })
+  @Exclude()
   isActive: boolean;
 }

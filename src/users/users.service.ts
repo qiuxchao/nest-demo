@@ -15,12 +15,6 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  /** 创建用户 */
-  async createUser(user: User): Promise<User> {
-    console.log('111', user);
-    return this.userRepository.save(user);
-  }
-
   /** 更新用户 */
   async updateUser(user: User): Promise<User> {
     await this.userRepository.update(user.id, user);

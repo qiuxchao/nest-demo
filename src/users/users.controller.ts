@@ -1,22 +1,20 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './users.entity';
 import { ObjectId } from 'typeorm';
+import { plainToClass } from 'class-transformer';
 
 @Controller('user')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get('list')
-  getUserList(@Req() req): Promise<User[]> {
-    console.log('user: ', req.user);
-    return this.usersService.getUserList();
-  }
-
-  @Post('create')
-  createUser(@Body() body: User): Promise<User> {
-    console.log('222', body);
-    return this.usersService.createUser(body);
+  async getUserList(): Promise<User[]> {
+    const users = await this.usersService.getUserList();
+    // 排除 password 字段
+    return users.map((user) =>
+      Object.assign(new User(), plainToClass(User, user)),
+    );
   }
 
   @Post('update')
@@ -30,8 +28,9 @@ export class UsersController {
   }
 
   @Post('info')
-  getUserById(@Body('id') id): Promise<User> {
-    console.log('333', id);
-    return this.usersService.getUserById(id);
+  async getUserById(@Body() body: { id: ObjectId }): Promise<User> {
+    const user = await this.usersService.getUserById(body.id);
+    // 排除 password 字段
+    return Object.assign(new User(), plainToClass(User, user));
   }
 }
