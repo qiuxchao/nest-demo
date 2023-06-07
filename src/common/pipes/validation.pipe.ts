@@ -9,12 +9,12 @@ import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
 
 @Injectable()
-export class AuthPipe implements PipeTransform {
+export class ValidationPipe implements PipeTransform {
   async transform(value: any, metadata: ArgumentMetadata) {
     const DTO = plainToInstance(metadata.metatype, value);
-    console.log('DTO: ', DTO);
+    console.log('Pipe DTO: ', DTO);
     const errors = await validate(DTO);
-    console.log('errors: ', errors);
+    console.log('Piepe errors: ', errors);
     if (errors.length) {
       throw new HttpException(errors, HttpStatus.BAD_REQUEST);
     }

@@ -1,4 +1,5 @@
 import { Entity, Column, ObjectIdColumn, ObjectId } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 @Entity('user')
 export class User {
@@ -9,6 +10,7 @@ export class User {
   username: string;
 
   @Column()
+  @Exclude()
   password: string;
 
   @Column()

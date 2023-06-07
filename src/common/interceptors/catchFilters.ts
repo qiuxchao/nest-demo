@@ -7,9 +7,11 @@ import {
 
 import { Request, Response } from 'express';
 
+/** 异常过滤器 */
 @Catch(HttpException)
 export class HttpFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
+    console.log('HttpFilter catch: ', exception.getResponse());
     const ctx = host.switchToHttp();
     const request = ctx.getRequest<Request>();
     const response = ctx.getResponse<Response>();
@@ -17,7 +19,7 @@ export class HttpFilter implements ExceptionFilter {
     const status = exception.getStatus();
 
     response.status(status).json({
-      data: exception.message,
+      data: exception.getResponse() || exception.message,
       time: new Date().getTime(),
       success: false,
       path: request.url,

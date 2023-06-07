@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigType } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -28,14 +28,14 @@ export class AuthService {
       where: { username },
     });
     if (!user) {
-      throw new Error('User not found');
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
     const isPasswordValid = await this.hashingService.compare(
       password,
       user.password,
     );
     if (!isPasswordValid) {
-      throw new Error('Invalid password');
+      throw new HttpException('Invalid password', HttpStatus.UNAUTHORIZED);
     }
     return await this.generateToken(user);
   }
@@ -73,7 +73,7 @@ export class AuthService {
       where: { username },
     });
     if (existingUser) {
-      throw new Error('User already exists');
+      throw new HttpException('User already exists', HttpStatus.CONFLICT);
     }
     // 生成hash密码
     const hashedPassword = await this.hashingService.hash(password);
