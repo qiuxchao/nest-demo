@@ -1,7 +1,8 @@
 # Nest Demo 1
 
 - 基本 CRUD
-- jwt 用户鉴权
+- jwt 用户鉴权(自定义守卫)
+- jwt 用户鉴权(passport 守卫)
 
 ## Installation
 
