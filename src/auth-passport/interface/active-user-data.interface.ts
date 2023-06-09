@@ -1,6 +1,7 @@
 import { ObjectId } from 'typeorm';
 
+/** JWT Token 荷载数据 */
 export interface ActiveUserData {
-  typeid: ObjectId;
+  sub: ObjectId;
   username: string;
 }

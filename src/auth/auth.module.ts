@@ -18,6 +18,7 @@ import { AccessTokenGuard } from './guards/access-token.guard';
   ],
   controllers: [AuthController],
   providers: [
+    // 注册全局守卫，公开的路由使用 @Public() 装饰器标记
     {
       provide: APP_GUARD,
       useClass: AccessTokenGuard,

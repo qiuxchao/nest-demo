@@ -1,21 +1,31 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  HttpCode,
+  HttpStatus,
+  ValidationPipe,
+} from '@nestjs/common';
 import { AuthPassportService } from './auth-passport.service';
 import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
+import { Public } from 'src/common/decorators/public.decorator';
 
-@Controller('auth-passport')
+@Controller('auth')
 export class AuthPassportController {
   constructor(private readonly authPassportService: AuthPassportService) {}
 
-  @Post()
-  async signIn(@Body() signInDto: SignInDto) {
-    console.log('signInDto: ', signInDto);
-    return '登录';
+  @Public()
+  @Post('sign-in')
+  @HttpCode(HttpStatus.OK)
+  async signIn(@Body(ValidationPipe) signInDto: SignInDto) {
+    return this.authPassportService.signIn(signInDto);
   }
 
-  @Post()
-  async signUp(@Body() signUpDto: SignUpDto) {
-    console.log('signUpDto: ', signUpDto);
-    return '注册';
+  @Public()
+  @Post('sign-up')
+  @HttpCode(HttpStatus.CREATED)
+  async signUp(@Body(ValidationPipe) signUpDto: SignUpDto) {
+    return this.authPassportService.signUp(signUpDto);
   }
 }
