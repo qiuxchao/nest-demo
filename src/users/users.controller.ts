@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './users.entity';
 import { ObjectId } from 'typeorm';
@@ -9,7 +9,8 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get('list')
-  async getUserList(): Promise<User[]> {
+  async getUserList(@Req() request): Promise<User[]> {
+    console.log('request', request.user);
     const users = await this.usersService.getUserList();
     // 排除 password 字段
     return users.map((user) =>

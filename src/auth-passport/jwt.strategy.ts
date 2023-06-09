@@ -13,8 +13,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  // 验证完成后将调用此方法，返回用户信息
+  // 验证完成后将调用此方法，返回用户信息，可在请求中使用
+  // 如：@Req() request，request.user 就是此处返回的对象
   async validate(payload: ActiveUserData) {
+    console.log('payload', payload);
     return { userId: payload.sub, username: payload.username };
   }
 }

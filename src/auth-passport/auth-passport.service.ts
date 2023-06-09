@@ -52,7 +52,7 @@ export class AuthPassportService {
   private async signToken<T>(userId: ObjectId, payload?: T) {
     return await this.jwtService.signAsync(
       {
-        typeid: userId,
+        sub: userId,
         ...payload,
       },
       {
